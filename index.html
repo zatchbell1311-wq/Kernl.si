@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>
+    (function() {
+      const t = localStorage.getItem('kernl-theme');
+      const s = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', t || s);
+    })();
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kernl.ai — Dynamic Semantic Patch Memory (DSPM)</title>
+  <meta name="description" content="A training-free Python library that compresses LLM conversation memory while structurally guaranteeing every critical constraint survives across any token budget.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/atom-one-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+</head>
+<body>
+
+  <!-- Page Transition & Loading Splash Screen -->
+  <div id="splash-screen">
+    <div class="splash-content">
+      <div class="splash-logo kernl-logo">
+        <span class="logo-mark">K</span><span class="logo-suffix">ernl.ai</span>
+      </div>
+      <div class="splash-sub">Dynamic Semantic Patch Memory</div>
+      <div class="splash-redirect-info"></div>
+    </div>
+  </div>
+
+  <!-- Shared Top Navigation -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="kernl-logo" aria-label="Kernl.ai Home">
+        <span class="logo-mark">K</span><span class="logo-suffix">ernl.ai</span>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="how-it-works.html" class="nav-link">How It Works</a></li>
+          <li><a href="benchmark.html" class="nav-link">Benchmark</a></li>
+          <li><a href="research.html" class="nav-link">Research</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="https://github.com/zatchbell1311-wq/Kernl#readme" target="_blank" rel="noopener noreferrer" class="nav-link">Docs</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="pip-copy-btn" title="Click to copy installation command">
+          <svg class="copy-icon" viewBox="0 0 24 24">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          <code>pip install dspm-memory</code>
+          <span class="tooltip">Copied!</span>
+        </button>
+
+        <!-- Theme Toggle Button (Between pip-install & GitHub icon) -->
+        <button class="theme-toggle-btn" id="theme-toggle" aria-label="Switch to dark mode" title="Switch to dark mode">
+          <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+
+        <a href="https://github.com/zatchbell1311-wq/Kernl" target="_blank" rel="noopener noreferrer" class="nav-icon-link" aria-label="Kernl on GitHub">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+        </a>
+
+        <button class="mobile-toggle" aria-label="Toggle navigation menu">
+          <svg viewBox="0 0 24 24">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer">
+      <a href="how-it-works.html" class="nav-link">How It Works</a>
+      <a href="benchmark.html" class="nav-link">Benchmark</a>
+      <a href="research.html" class="nav-link">Research</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="https://github.com/zatchbell1311-wq/Kernl#readme" target="_blank" rel="noopener noreferrer" class="nav-link">Docs</a>
+      <button class="pip-copy-btn copy-pip-action" style="width: 100%; justify-content: center;">
+        <code>pip install dspm-memory</code>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <div class="container">
+      
+      <!-- Distinct Floating Rounded Hero Card with Animated Glitter Border -->
+      <section class="hero-card">
+        <!-- Ambient Glow Patches (z-index: 0) -->
+        <div class="glow-patch glow-left"></div>
+        <div class="glow-patch glow-right"></div>
+
+        <div class="hero-grid">
+            <div class="hero-content">
+              
+              <!-- Credential Pill Above Headline -->
+              <a href="about.html" class="hero-credential-pill">
+                <span>🏆</span>
+                <span>Selected &mdash; Sarvam AI Startup Program 2026</span>
+              </a>
+
+              <!-- Badges Row -->
+              <div class="badge-row">
+                <span class="badge blue-tint">DSPM-MEMORY</span>
+                <span class="badge">TRAINING-FREE</span>
+                <span class="badge">100% CRR</span>
+                <span class="badge">v0.1.13</span>
+              </div>
+
+              <!-- Hero Headline in Lora Serif -->
+              <h1 class="hero-headline">
+                Never Lose a Constraint.<br>
+                <span class="blue-line">Compress Everything Else.</span>
+              </h1>
+
+              <p class="hero-subheadline">
+                A training-free Python library that compresses LLM conversation memory while structurally guaranteeing every critical constraint survives &mdash; revisions, numbers, deadlines &mdash; across any token budget.
+              </p>
+
+              <div class="btn-group">
+                <a href="#quickstart" class="btn btn-primary">
+                  Get Started &rarr;
+                </a>
+                <a href="how-it-works.html" class="btn btn-ghost">How It Works</a>
+                <a href="research.html" class="btn btn-ghost">Read the paper &rarr;</a>
+              </div>
+            </div>
+
+            <!-- Code Quickstart Panel (Dark Contrast Island) -->
+            <div class="code-panel" id="quickstart">
+              <div class="code-header">
+                <div class="file-tab">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                  </svg>
+                  <span>quickstart.py</span>
+                </div>
+                <span class="lang-badge">PYTHON</span>
+              </div>
+
+              <pre><code class="language-python">from dspm_memory import DSPMMemory
+import openai
+
+client = openai.OpenAI(api_key="sk-...")
+memory = DSPMMemory(budget=250, llm_client=client)
+
+# Conversation with a revision
+memory.add_turn("user",      "Set webhook timeout to 30s.")
+memory.add_turn("assistant", "Done.")
+memory.add_turn("user",      "Change that to 10s.")
+memory.add_turn("assistant", "Updated.")
+
+# Both values survive compression
+print(memory.get_context())
+# → webhook_timeout: 10 (was 30)</code></pre>
+
+              <div class="code-footer">
+                <span class="quick-install" title="Copy command">
+                  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                  <span>pip install dspm-memory</span>
+                </span>
+                <a href="https://pypi.org/project/dspm-memory/" target="_blank" rel="noopener noreferrer" style="color: var(--text-muted); display: flex; align-items: center; gap: 0.3rem;">
+                  PyPI &rarr;
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Metric Cards -->
+          <div class="metric-grid-4">
+            <div class="metric-card">
+              <div class="metric-number">100%</div>
+              <div class="metric-label">CRR</div>
+              <div class="metric-desc">Critical Retention Rate</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-number">82.84%</div>
+              <div class="metric-label">TRR</div>
+              <div class="metric-desc">Total Retention Rate</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-number">Zero</div>
+              <div class="metric-label">Fabrications</div>
+              <div class="metric-desc">dspm selects and reformats &mdash; no invented values, ever</div>
+            </div>
+
+            <div class="metric-card">
+              <div class="metric-number">250</div>
+              <div class="metric-label">Token Budget</div>
+              <div class="metric-desc">Default budget, configurable</div>
+            </div>
+          </div>
+      </section>
+
+      <!-- Recognition Section (3 Prominent Cards with Glow Patch 3) -->
+      <section class="recognition-section">
+        <!-- Radial Glow Patch 3 -->
+        <div class="glow-patch glow-patch-3"></div>
+
+        <span class="section-label">Recognition</span>
+        <div class="recognition-grid-3">
+          
+          <!-- Card 1: Sarvam AI -->
+          <div class="recognition-card">
+            <div class="recognition-card-icon" style="overflow: hidden; padding: 4px; display: flex; align-items: center; justify-content: center;">
+              <img src="images/sarvam-logo.png" alt="Sarvam AI Official Logo" class="brand-logo-img sarvam-brand-img" style="max-height: 28px; width: auto; object-fit: contain;">
+            </div>
+            <h3>Sarvam AI Startup Program 2026</h3>
+            <p>DSPM selected as an Independent Research Project. &#8377;25,000 in API credits.</p>
+          </div>
+
+          <!-- Card 2: CAICS -->
+          <div class="recognition-card">
+            <div class="recognition-card-icon">🎓</div>
+            <h3>CAICS 2026 &mdash; IISc Bengaluru</h3>
+            <p>Poster presentation at Joint Colloquium on AI and Cybersecurity. Co-organized by Argonne National Laboratory, funded by U.S. Department of State.</p>
+          </div>
+
+          <!-- Card 3: Zenodo -->
+          <div class="recognition-card">
+            <div class="recognition-card-icon">📄</div>
+            <h3>Open Research &mdash; Zenodo</h3>
+            <p>Two preprints published with DOI. DSPM: 10.5281/zenodo.19438636</p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Stats Detailed Row -->
+      <section style="padding: 20px 0 60px;">
+        <div class="stats-detailed-grid">
+          <div class="stat-detailed-card">
+            <div class="val">100%</div>
+            <h3>Critical Retention Rate</h3>
+            <p>
+              Structural guarantee via T6 Shadow Selection &mdash; not a statistical average. Every compression call re-injects any displaced critical patch.
+            </p>
+          </div>
+
+          <div class="stat-detailed-card">
+            <div class="val">82.84%</div>
+            <h3>Total Retention Rate</h3>
+            <p>
+              Measured at 250-token budget across 3 adversarial rounds of structured paper QA &mdash; the tightest reasonable production budget.
+            </p>
+          </div>
+
+          <div class="stat-detailed-card">
+            <div class="val">Zero</div>
+            <h3>Fabricated Facts</h3>
+            <p>
+              dspm selects and reformats &mdash; it never rewrites. Numeric values, units, and constraint text are preserved verbatim.
+            </p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+    <!-- The Problem Section -->
+    <div class="problem-section-wrapper">
+      <div class="container">
+        <div style="max-width: 760px;">
+          <span class="badge blue-tint" style="margin-bottom: 0.75rem;">MEMORY DEGRADATION</span>
+          <h2 class="section-title">Context windows eat their own history</h2>
+          <p class="section-subtitle">
+            Standard memory strategies &mdash; rolling truncation, summaries, embeddings &mdash; treat every token as equally disposable. A constraint the user stated in turn 2 is gone by turn 30. They don't know it's gone. That's the bug.
+          </p>
+        </div>
+
+        <div class="problem-grid">
+          <!-- WITHOUT DSPM -->
+          <div class="problem-col without">
+            <div class="problem-col-header">
+              <span class="problem-bullet">✗</span>
+              <h3>WITHOUT DSPM</h3>
+            </div>
+            <ul class="problem-list">
+              <li>
+                <span class="problem-bullet">✗</span>
+                <span>Long conversations silently drop earlier constraints</span>
+              </li>
+              <li>
+                <span class="problem-bullet">✗</span>
+                <span>A revision in turn 3 is invisible by turn 40</span>
+              </li>
+              <li>
+                <span class="problem-bullet">✗</span>
+                <span>Naïve truncation loses the most critical context first</span>
+              </li>
+              <li>
+                <span class="problem-bullet">✗</span>
+                <span>LLM summaries hallucinate or alter numeric values</span>
+              </li>
+              <li>
+                <span class="problem-bullet">✗</span>
+                <span>Retrieval misses implicit constraint chains</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- WITH DSPM -->
+          <div class="problem-col with">
+            <div class="problem-col-header">
+              <span class="problem-bullet">✓</span>
+              <h3>WITH DSPM</h3>
+            </div>
+            <ul class="problem-list">
+              <li>
+                <span class="problem-bullet">✓</span>
+                <span>Every critical constraint tracked across every turn</span>
+              </li>
+              <li>
+                <span class="problem-bullet">✓</span>
+                <span>Revisions stored as deltas: "10 (was 30)"</span>
+              </li>
+              <li>
+                <span class="problem-bullet">✓</span>
+                <span>T6 Shadow Selection enforces 100% CRR structurally</span>
+              </li>
+              <li>
+                <span class="problem-bullet">✓</span>
+                <span>Zero fabrication &mdash; no invented values, ever</span>
+              </li>
+              <li>
+                <span class="problem-bullet">✓</span>
+                <span>Works offline, works with every provider</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Design Rationale Quote -->
+    <div class="container">
+      <div class="quote-banner">
+        <blockquote>
+          "A constraint dropped by the memory system is indistinguishable from a constraint the user never gave — except the user knows they gave it."
+        </blockquote>
+        <cite>— DSPM Design Rationale, Zenodo 2026</cite>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Shared Footer -->
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-brand">
+        <a href="index.html" class="kernl-logo">
+          <span class="logo-mark">K</span><span class="logo-suffix">ernl.ai</span>
+        </a>
+        <p>
+          Training-free LLM conversation memory compression. 100% Critical Retention Rate — structurally enforced.
+        </p>
+      </div>
+
+      <div class="footer-center-links">
+        <a href="https://pypi.org/project/dspm-memory/" target="_blank" rel="noopener noreferrer">PyPI</a>
+        <a href="https://doi.org/10.5281/zenodo.19438636" target="_blank" rel="noopener noreferrer">DOI</a>
+        <a href="https://github.com/zatchbell1311-wq/Kernl" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="research.html">Research Paper</a>
+        <a href="https://x.com/ddubey272412" target="_blank" rel="noopener noreferrer">Twitter/X</a>
+      </div>
+
+      <div class="footer-right">
+        <div>&copy; 2026 Kernl.ai &mdash; MIT License</div>
+        <div class="version-tag">dspm-memory v0.1.13</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

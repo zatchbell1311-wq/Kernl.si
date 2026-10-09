@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>
+    (function() {
+      const t = localStorage.getItem('kernl-theme');
+      const s = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', t || s);
+    })();
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About — Dhruv Dubey &middot; Kernl.ai</title>
+  <meta name="description" content="Dhruv Dubey is an independent AI researcher working on LLM memory and inference. Creator of DSPM and open-source contributor to Yale, UW, and Waterloo projects.">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Page Transition & Loading Splash Screen -->
+  <div id="splash-screen">
+    <div class="splash-content">
+      <div class="splash-logo kernl-logo">
+        <span class="logo-mark">K</span><span class="logo-suffix">ernl.ai</span>
+      </div>
+      <div class="splash-sub">Dynamic Semantic Patch Memory</div>
+      <div class="splash-redirect-info"></div>
+    </div>
+  </div>
+
+  <!-- Shared Top Navigation -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="kernl-logo" aria-label="Kernl.ai Home">
+        <span class="logo-mark">K</span><span class="logo-suffix">ernl.ai</span>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="how-it-works.html" class="nav-link">How It Works</a></li>
+          <li><a href="benchmark.html" class="nav-link">Benchmark</a></li>
+          <li><a href="research.html" class="nav-link">Research</a></li>
+          <li><a href="about.html" class="nav-link active">About</a></li>
+          <li><a href="https://github.com/zatchbell1311-wq/Kernl#readme" target="_blank" rel="noopener noreferrer" class="nav-link">Docs</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="pip-copy-btn" title="Click to copy installation command">
+          <svg class="copy-icon" viewBox="0 0 24 24">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          <code>pip install dspm-memory</code>
+          <span class="tooltip">Copied!</span>
+        </button>
+
+        <!-- Theme Toggle Button -->
+        <button class="theme-toggle-btn" id="theme-toggle" aria-label="Switch to dark mode" title="Switch to dark mode">
+          <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+
+        <a href="https://github.com/zatchbell1311-wq/Kernl" target="_blank" rel="noopener noreferrer" class="nav-icon-link" aria-label="Kernl on GitHub">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+        </a>
+
+        <button class="mobile-toggle" aria-label="Toggle navigation menu">
+          <svg viewBox="0 0 24 24">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer">
+      <a href="how-it-works.html" class="nav-link">How It Works</a>
+      <a href="benchmark.html" class="nav-link">Benchmark</a>
+      <a href="research.html" class="nav-link">Research</a>
+      <a href="about.html" class="nav-link active">About</a>
+      <a href="https://github.com/zatchbell1311-wq/Kernl#readme" target="_blank" rel="noopener noreferrer" class="nav-link">Docs</a>
+      <button class="pip-copy-btn copy-pip-action" style="width: 100%; justify-content: center;">
+        <code>pip install dspm-memory</code>
+      </button>
+    </div>
+  </header>
+
+  <!-- Page Content -->
+  <main>
+    <div class="container" style="padding-top: 60px; padding-bottom: 80px;">
+      
+      <!-- Profile & Header Section -->
+      <header class="author-header">
+        <div>
+          <div class="badge-row">
+            <span class="badge blue-tint">RESEARCHER PROFILE</span>
+            <span class="badge">SYSTEMS &amp; INFERENCE</span>
+          </div>
+          <h1 class="section-title" style="font-size: 3.25rem;">
+            Dhruv Dubey
+          </h1>
+          <div style="font-family: var(--font-mono); font-size: 1.15rem; color: var(--accent); font-weight: 600; margin-bottom: 1.75rem;">
+            Independent AI Researcher
+          </div>
+
+          <div style="font-size: 1.125rem; color: var(--text); line-height: 1.75; max-width: 820px;">
+            <p style="margin-bottom: 1.25rem;">
+              I research LLM memory and inference, independently since early 2026. DSPM grew out of a simple observation: standard memory strategies treat every token as equally disposable. They're wrong.
+            </p>
+            <p>
+              All of this &mdash; SSPM, DSPM, the evaluation suite, the PyPI package &mdash; was built independently, without institutional lab support, on free-tier infrastructure.
+            </p>
+          </div>
+        </div>
+      </header>
+
+      <!-- Open Source Contributions (With Real Logos) -->
+      <section style="margin: 60px 0;">
+        <span class="section-label">LABS &amp; SYSTEMS</span>
+        <h2 class="section-title">Open Source Contributions</h2>
+        <p class="section-subtitle">
+          Direct technical contributions to research laboratories and foundational systems.
+        </p>
+
+        <div class="contrib-grid">
+          
+          <!-- YALE UNIVERSITY -->
+          <div class="contrib-card">
+            <div class="contrib-logo-box" title="Yale University Official Logo">
+              <img src="images/yale-white-badge.png" alt="Yale University Logo" class="brand-logo-img">
+            </div>
+            <h3 class="contrib-univ">Yale University</h3>
+            <div class="contrib-lab">Pie LLM Inference Engine &middot; Prof. Lin Zhong</div>
+            <p class="contrib-desc">
+              Open-source contributor to Pie, a high-performance LLM inference engine developed at Yale's Efficient Computing Lab.
+            </p>
+          </div>
+
+          <!-- UNIVERSITY OF WATERLOO -->
+          <div class="contrib-card">
+            <div class="contrib-logo-box round-badge" title="University of Waterloo Official Heraldic Seal">
+              <img src="images/waterloo-seal.png" alt="University of Waterloo Seal" class="brand-logo-img">
+            </div>
+            <h3 class="contrib-univ">University of Waterloo</h3>
+            <div class="contrib-lab">Pyserini &amp; Anserini &middot; Prof. Jimmy Lin</div>
+            <p class="contrib-desc">
+              Contributed to Pyserini and Anserini, the widely-used IR toolkits at the Castorini Research Group. Identified and merged a fix resolving a core PCL issue.
+            </p>
+          </div>
+
+          <!-- UNIVERSITY OF WASHINGTON -->
+          <div class="contrib-card">
+            <div class="contrib-logo-box round-badge" title="University of Washington Official Seal">
+              <img src="images/uw-seal.png" alt="University of Washington Seal" class="brand-logo-img">
+            </div>
+            <h3 class="contrib-univ">University of Washington</h3>
+            <div class="contrib-lab">VibeServe &middot; Prof. Baris Kasikci</div>
+            <p class="contrib-desc">
+              Contributed to VibeServe, an agentic system that generates bespoke LLM serving stacks end-to-end.
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Recognition Section (Sarvam AI & CAICS) -->
+      <section style="margin: 60px 0;">
+        <span class="section-label">FORMAL SELECTION</span>
+        <h2 class="section-title">Recognition</h2>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 1.5rem;">
+          
+          <!-- Sarvam AI Card -->
+          <div class="card" style="display: flex; gap: 1.25rem; align-items: flex-start; background: var(--recog-bg); border-color: var(--recog-border);">
+            <div style="width: 52px; height: 52px; border-radius: var(--radius-sm); background: var(--surface); border: 1px solid var(--recog-border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; padding: 6px;">
+              <img src="images/sarvam-official.png" alt="Sarvam AI Official Logo" class="brand-logo-img sarvam-brand-img">
+            </div>
+            <div>
+              <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--heading); margin-bottom: 0.25rem;">
+                Sarvam AI Startup Program 2026
+              </h3>
+              <p style="font-size: 0.875rem; color: var(--text); line-height: 1.55;">
+                DSPM accepted as an independent research project with dedicated compute support and research credits.
+              </p>
+            </div>
+          </div>
+
+          <!-- Poster CAICS Card -->
+          <div class="card" style="display: flex; gap: 1.25rem; align-items: flex-start; background: var(--recog-bg); border-color: var(--recog-border);">
+            <div style="width: 52px; height: 52px; border-radius: var(--radius-sm); background: var(--surface); border: 1px solid var(--recog-border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1.5rem;">
+              🎓
+            </div>
+            <div>
+              <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--heading); margin-bottom: 0.25rem;">
+                Poster &mdash; CAICS 2026
+              </h3>
+              <p style="font-size: 0.875rem; color: var(--text); line-height: 1.55;">
+                IISc Bengaluru &times; Argonne National Laboratory &middot; Joint Colloquium on AI and Cybersecurity &middot; 31 Aug &ndash; 2 Sep 2026 &middot; Funded by U.S. Dept of State.
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Links Row -->
+      <section style="margin: 60px 0 20px;">
+        <span class="section-label">CONNECT &amp; CODE</span>
+        <h2 class="section-title">Verified Profiles &amp; Contact</h2>
+
+        <div class="links-row-grid">
+          
+          <!-- GitHub -->
+          <a href="https://github.com/zatchbell1311-wq" target="_blank" rel="noopener noreferrer" class="link-contact-card">
+            <svg viewBox="0 0 24 24">
+              <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
+            </svg>
+            <div>
+              <div class="info-title">GitHub</div>
+              <div class="info-val">zatchbell1311-wq</div>
+            </div>
+          </a>
+
+          <!-- LinkedIn -->
+          <a href="https://linkedin.com/in/d-dubeyofficialwork" target="_blank" rel="noopener noreferrer" class="link-contact-card">
+            <svg viewBox="0 0 24 24">
+              <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
+              <rect x="2" y="9" width="4" height="12"></rect>
+              <circle cx="4" cy="4" r="2"></circle>
+            </svg>
+            <div>
+              <div class="info-title">LinkedIn</div>
+              <div class="info-val">d-dubeyofficialwork</div>
+            </div>
+          </a>
+
+          <!-- Twitter/X -->
+          <a href="https://x.com/ddubey272412" target="_blank" rel="noopener noreferrer" class="link-contact-card">
+            <svg viewBox="0 0 24 24" fill="none">
+              <path d="M4 4l16 16m0-16L4 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+            <div>
+              <div class="info-title">Twitter / X</div>
+              <div class="info-val">@ddubey272412</div>
+            </div>
+          </a>
+
+          <!-- ORCID -->
+          <a href="https://orcid.org/0009-0004-5510-9000" target="_blank" rel="noopener noreferrer" class="link-contact-card">
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="16"></line>
+              <line x1="8" y1="8" x2="8.01" y2="8"></line>
+            </svg>
+            <div>
+              <div class="info-title">ORCID</div>
+              <div class="info-val">0009-0004-5510-9000</div>
+            </div>
+          </a>
+
+          <!-- Email -->
+          <a href="mailto:dhruvdubey1311@gmail.com" class="link-contact-card">
+            <svg viewBox="0 0 24 24">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            <div>
+              <div class="info-title">Email</div>
+              <div class="info-val">dhruvdubey1311@gmail.com</div>
+            </div>
+          </a>
+
+          <!-- Portfolio -->
+          <a href="https://dhruv-dubey-bento-portfolio.vercel.app" target="_blank" rel="noopener noreferrer" class="link-contact-card">
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+              <line x1="3" y1="9" x2="21" y2="9"></line>
+              <line x1="9" y1="21" x2="9" y2="9"></line>
+            </svg>
+            <div>
+              <div class="info-title">Portfolio</div>
+              <div class="info-val">dhruv-dubey-bento-portfolio</div>
+            </div>
+          </a>
+
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Shared Footer -->
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-brand">
+        <a href="index.html" class="kernl-logo">
+          <span class="logo-mark">K</span><span class="logo-suffix">ernl.ai</span>
+        </a>
+        <p>
+          Training-free LLM conversation memory compression. 100% Critical Retention Rate — structurally enforced.
+        </p>
+      </div>
+
+      <div class="footer-center-links">
+        <a href="https://pypi.org/project/dspm-memory/" target="_blank" rel="noopener noreferrer">PyPI</a>
+        <a href="https://doi.org/10.5281/zenodo.19438636" target="_blank" rel="noopener noreferrer">DOI</a>
+        <a href="https://github.com/zatchbell1311-wq/Kernl" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="research.html">Research Paper</a>
+        <a href="https://x.com/ddubey272412" target="_blank" rel="noopener noreferrer">Twitter/X</a>
+      </div>
+
+      <div class="footer-right">
+        <div>&copy; 2026 Kernl.ai &mdash; MIT License</div>
+        <div class="version-tag">dspm-memory v0.1.13</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>

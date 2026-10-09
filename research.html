@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script>
+    (function() {
+      const t = localStorage.getItem('kernl-theme');
+      const s = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      document.documentElement.setAttribute('data-theme', t || s);
+    })();
+  </script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Research &amp; Publications — Kernl.ai (DSPM)</title>
+  <meta name="description" content="Open access research preprints, formal specifications, and academic presentations for Dynamic Semantic Patch Memory (DSPM).">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Page Transition & Loading Splash Screen -->
+  <div id="splash-screen">
+    <div class="splash-content">
+      <div class="splash-logo kernl-logo">
+        <span class="logo-mark">K</span><span class="logo-suffix">ernl.ai</span>
+      </div>
+      <div class="splash-sub">Dynamic Semantic Patch Memory</div>
+      <div class="splash-redirect-info"></div>
+    </div>
+  </div>
+
+  <!-- Shared Top Navigation -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="index.html" class="kernl-logo" aria-label="Kernl.ai Home">
+        <span class="logo-mark">K</span><span class="logo-suffix">ernl.ai</span>
+      </a>
+
+      <nav>
+        <ul class="nav-links">
+          <li><a href="how-it-works.html" class="nav-link">How It Works</a></li>
+          <li><a href="benchmark.html" class="nav-link">Benchmark</a></li>
+          <li><a href="research.html" class="nav-link active">Research</a></li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="https://github.com/zatchbell1311-wq/Kernl#readme" target="_blank" rel="noopener noreferrer" class="nav-link">Docs</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <button class="pip-copy-btn" title="Click to copy installation command">
+          <svg class="copy-icon" viewBox="0 0 24 24">
+            <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+          </svg>
+          <code>pip install dspm-memory</code>
+          <span class="tooltip">Copied!</span>
+        </button>
+
+        <!-- Theme Toggle Button -->
+        <button class="theme-toggle-btn" id="theme-toggle" aria-label="Switch to dark mode" title="Switch to dark mode">
+          <svg viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        </button>
+
+        <a href="https://github.com/zatchbell1311-wq/Kernl" target="_blank" rel="noopener noreferrer" class="nav-icon-link" aria-label="Kernl on GitHub">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+          </svg>
+        </a>
+
+        <button class="mobile-toggle" aria-label="Toggle navigation menu">
+          <svg viewBox="0 0 24 24">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div class="mobile-drawer">
+      <a href="how-it-works.html" class="nav-link">How It Works</a>
+      <a href="benchmark.html" class="nav-link">Benchmark</a>
+      <a href="research.html" class="nav-link active">Research</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="https://github.com/zatchbell1311-wq/Kernl#readme" target="_blank" rel="noopener noreferrer" class="nav-link">Docs</a>
+      <button class="pip-copy-btn copy-pip-action" style="width: 100%; justify-content: center;">
+        <code>pip install dspm-memory</code>
+      </button>
+    </div>
+  </header>
+
+  <!-- Page Content -->
+  <main>
+    <div class="container" style="padding-top: 60px; padding-bottom: 80px;">
+      
+      <!-- Header Section -->
+      <header style="max-width: 820px; margin-bottom: 3.5rem;">
+        <div class="badge-row">
+          <span class="badge blue-tint">OPEN ACCESS</span>
+          <span class="badge">ZENODO ARCHIVE</span>
+        </div>
+        <h1 class="section-title" style="font-size: 3rem;">
+          Open Research
+        </h1>
+        <p class="section-subtitle" style="font-size: 1.15rem; margin-top: 0.75rem;">
+          Both preprints are publicly available on Zenodo under open access. No paywalls.
+        </p>
+      </header>
+
+      <!-- Preprint Cards (2 Cards) -->
+      <section>
+        <div class="preprints-grid">
+          
+          <!-- CARD 1: DSPM -->
+          <div class="preprint-card">
+            <div>
+              <span class="preprint-doi">DOI: 10.5281/zenodo.19438636</span>
+              <h2 class="preprint-title">Dynamic Semantic Patch Memory (DSPM)</h2>
+              <p class="preprint-summary">
+                Primary paper. Defines the 7-stage pipeline, patch structure P=&lang;id, t, &tau;, s, d, u, c&rang;, formal equations 1&ndash;8, Algorithm 1, ablation studies, and full evaluation on B250/B400 budgets.
+              </p>
+            </div>
+
+            <div class="preprint-actions">
+              <a href="https://doi.org/10.5281/zenodo.19438636" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                View on Zenodo &rarr;
+              </a>
+              <button class="btn btn-ghost" data-cite="dspm">
+                Cite
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                  <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- CARD 2: SSPM -->
+          <div class="preprint-card">
+            <div>
+              <span class="preprint-doi">DOI: 10.5281/zenodo.19033643</span>
+              <h2 class="preprint-title">Structured Semantic Patch Memory (SSPM)</h2>
+              <p class="preprint-summary">
+                Companion preprint. The precursor architecture that established the patch-based memory paradigm leading to DSPM.
+              </p>
+            </div>
+
+            <div class="preprint-actions">
+              <a href="https://doi.org/10.5281/zenodo.19033643" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                View on Zenodo &rarr;
+              </a>
+              <button class="btn btn-ghost" data-cite="sspm">
+                Cite
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"></path>
+                  <rect x="8" y="2" width="8" height="4" rx="1" ry="1"></rect>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Recognition Section -->
+      <section style="margin: 60px 0;">
+        <span class="section-label">AWARDS &amp; PRESENTATIONS</span>
+        <h2 class="section-title">Recognition &amp; Presentations</h2>
+
+        <div style="display: flex; flex-direction: column; gap: 1.5rem; margin-top: 1.5rem;">
+          
+          <!-- Sarvam AI Item -->
+          <div class="card" style="display: flex; gap: 1.75rem; align-items: flex-start; background: var(--recog-bg); border-color: var(--recog-border);">
+            <div style="width: 52px; height: 52px; border-radius: var(--radius-sm); background: var(--surface); border: 1px solid var(--recog-border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; padding: 6px;">
+              <img src="images/sarvam-logo-dark.png" alt="Sarvam AI Logo" class="brand-logo-img sarvam-brand-img">
+            </div>
+            <div style="flex: 1;">
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--heading);">
+                  Sarvam AI Startup Program 2026
+                </h3>
+                <span class="badge blue-tint">STARTUP PROGRAM</span>
+              </div>
+              <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent); font-weight: 600; margin: 0.35rem 0;">
+                Selected as "Independent Research Project &ndash; SSPM"
+              </div>
+              <p style="font-size: 0.9rem; color: var(--text); line-height: 1.55;">
+                Includes &#8377;25,000 in dedicated API credits and Business tier rate limits to support open LLM memory benchmarking and production testing.
+              </p>
+            </div>
+          </div>
+
+          <!-- CAICS 2026 Item -->
+          <div class="card" style="display: flex; gap: 1.75rem; align-items: flex-start; background: var(--recog-bg); border-color: var(--recog-border);">
+            <div style="width: 52px; height: 52px; border-radius: var(--radius-sm); background: var(--surface); border: 1px solid var(--recog-border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1.5rem;">
+              🎓
+            </div>
+            <div style="flex: 1;">
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.5rem;">
+                <h3 style="font-size: 1.2rem; font-weight: 700; color: var(--heading);">
+                  CAICS 2026 &mdash; Poster Presentation
+                </h3>
+                <span class="badge blue-tint">POSTER PRESENTER</span>
+              </div>
+              <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text); margin: 0.35rem 0;">
+                Joint Colloquium on Artificial Intelligence and Cybersecurity &middot; 31 August &ndash; 2 September 2026
+              </div>
+              <p style="font-size: 0.9rem; color: var(--text); line-height: 1.55;">
+                Held at Indian Institute of Science (IISc), Bengaluru. Co-organized by Argonne National Laboratory. Funded by the U.S. Department of State.<br>
+                <strong>Poster:</strong> Dynamic Semantic Patch Memory &middot; <strong>Certificate No. 32</strong> &mdash; signed by Prof. Sashikumaar Ganesan (CDS, IISc) and Mr. Dan Harkness (Cybersecurity Lead, Argonne).
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Design Rationale Quote -->
+      <div class="quote-banner">
+        <blockquote>
+          "A constraint dropped by the memory system is indistinguishable from a constraint the user never gave — except the user knows they gave it."
+        </blockquote>
+        <cite>— DSPM Design Rationale, Zenodo 2026</cite>
+      </div>
+
+      <!-- arXiv Note -->
+      <section style="margin: 40px 0 20px; padding: 2rem; border-radius: var(--radius-md); background: var(--surface); border: 1px solid var(--border); display: flex; gap: 1.5rem; align-items: center; box-shadow: 0 1px 4px rgba(0,0,0,0.04);">
+        <div style="width: 44px; height: 44px; border-radius: var(--radius-sm); background: var(--accent-light); border: 1px solid var(--recog-border); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+            <line x1="16" y1="13" x2="8" y2="13"></line>
+            <line x1="16" y1="17" x2="8" y2="17"></line>
+            <polyline points="10 9 9 9 8 9"></polyline>
+          </svg>
+        </div>
+        <div>
+          <h4 style="font-size: 1.05rem; font-weight: 700; color: var(--heading); margin-bottom: 0.25rem;">
+            arXiv Submission Notice
+          </h4>
+          <p style="font-size: 0.875rem; color: var(--text); line-height: 1.5;">
+            Submitted to arXiv (cs.CL) &mdash; submission ID: <code>submit/8058015</code>. Endorsed by In Gim (Yale PhD student, Pie LLM inference project).
+          </p>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Citation Modal -->
+  <div class="modal-overlay" id="citation-modal">
+    <div class="modal-dialog">
+      <div class="modal-header">
+        <h3 style="color: var(--heading);">BibTeX Citation</h3>
+        <button class="modal-close-btn" aria-label="Close dialog">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code id="citation-code"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" id="modal-copy-citation">Copy BibTeX</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Shared Footer -->
+  <footer class="site-footer">
+    <div class="container footer-container">
+      <div class="footer-brand">
+        <a href="index.html" class="kernl-logo">
+          <span class="logo-mark">K</span><span class="logo-suffix">ernl.ai</span>
+        </a>
+        <p>
+          Training-free LLM conversation memory compression. 100% Critical Retention Rate — structurally enforced.
+        </p>
+      </div>
+
+      <div class="footer-center-links">
+        <a href="https://pypi.org/project/dspm-memory/" target="_blank" rel="noopener noreferrer">PyPI</a>
+        <a href="https://doi.org/10.5281/zenodo.19438636" target="_blank" rel="noopener noreferrer">DOI</a>
+        <a href="https://github.com/zatchbell1311-wq/Kernl" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <a href="research.html">Research Paper</a>
+        <a href="https://x.com/ddubey272412" target="_blank" rel="noopener noreferrer">Twitter/X</a>
+      </div>
+
+      <div class="footer-right">
+        <div>&copy; 2026 Kernl.ai &mdash; MIT License</div>
+        <div class="version-tag">dspm-memory v0.1.13</div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
