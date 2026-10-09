@@ -85,7 +85,7 @@ function initPageTransitions() {
     splash.innerHTML = `
       <div class="splash-content">
         <div class="splash-logo kernl-logo">
-          <span class="logo-mark">K</span><span class="logo-suffix">ernl.ai</span>
+          <span class="logo-mark">K</span><span class="logo-suffix">ernl.si</span>
         </div>
         <div class="splash-sub">Dynamic Semantic Patch Memory</div>
         <div class="splash-redirect-info"></div>
@@ -97,7 +97,7 @@ function initPageTransitions() {
   const splashLogo = splash.querySelector('.splash-logo') || splash.querySelector('.kernl-logo');
   const redirectInfo = splash.querySelector('.splash-redirect-info');
 
-  // 1. Entrance animation: full "Kernl.ai", then "ernl.ai" absorbs into glowing "K"
+  // 1. Entrance animation: full "Kernl.si", then "ernl.si" absorbs into glowing "K"
   setTimeout(() => {
     if (splashLogo) {
       splashLogo.classList.add('absorbed');
